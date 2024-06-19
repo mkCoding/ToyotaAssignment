@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -32,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
 import com.example.toyataassignment.R
@@ -39,7 +41,7 @@ import com.example.toyataassignment.data.model.ProductModel
 import com.example.toyataassignment.data.model.ProductsModel
 
 @Composable
-fun ProductsListScreen(productListViewModel: ProductListViewModel){
+fun ProductsListScreen(navController: NavController, productListViewModel: ProductListViewModel){
 
     //get list of all products used
     val productsList by productListViewModel.productList.collectAsState(initial = emptyList()) //variable to accessing list from view model
@@ -60,12 +62,13 @@ fun ProductsListScreen(productListViewModel: ProductListViewModel){
         )
 
         //navController and ProductViewModel
-        ProductsList(productsList)
+        ProductsList(navController,productsList)
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductsList (productsList:List<ProductModel?>?){
+fun ProductsList (navController:NavController, productsList:List<ProductModel?>?){
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -88,7 +91,11 @@ fun ProductsList (productsList:List<ProductModel?>?){
               modifier = Modifier
                   .fillMaxSize()
                   .fillMaxWidth()
-                  .padding(8.dp)
+                  .padding(8.dp),
+                onClick = {
+                        // Navigate to driver details when card is clicked
+                        navController.navigate("details/${itemiuk?.id}")
+                }
 
                   )
           {

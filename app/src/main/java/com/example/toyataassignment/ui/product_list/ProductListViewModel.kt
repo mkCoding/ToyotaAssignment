@@ -14,8 +14,15 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductListViewModel @Inject constructor(private val repository: ApiRepository):ViewModel() {
 
+    //Product List
     private val _productList = MutableStateFlow<List<ProductModel?>?>(emptyList())
     val productList: MutableStateFlow<List<ProductModel?>?> = _productList
+
+    //Product Details
+    private val _productDetails = MutableStateFlow<ProductModel?>(null)
+    val productDetails: MutableStateFlow<ProductModel?> = _productDetails
+
+
 
     init {
         getAllProducts()
@@ -35,8 +42,24 @@ class ProductListViewModel @Inject constructor(private val repository: ApiReposi
             }
         }
 
-
     }
 
 
-}
+    fun getProductById(productId:Int?){
+        viewModelScope.launch {
+            val product = repository.getProductDetails(productId)
+
+            if(product!=null){
+
+                Log.d("ProductListViewModel", product.toString())
+
+                _productDetails.value = product
+
+            }
+
+        }
+    }
+
+
+
+    }

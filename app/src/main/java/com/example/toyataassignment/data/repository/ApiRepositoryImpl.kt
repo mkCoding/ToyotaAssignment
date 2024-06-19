@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class ApiRepositoryImpl @Inject constructor(private val apiEndpoints: ApiEndpoints):ApiRepository {
     override suspend fun getAllProducts(): ProductsModel  = apiEndpoints.getAllProducts()
-    override suspend fun getProductDetails(productId: Int): ProductModel = apiEndpoints.getProductDetails(0)
+    override suspend fun getProductDetails(productId: Int?): ProductModel = apiEndpoints.getProductDetails(productId)
 
 
 
