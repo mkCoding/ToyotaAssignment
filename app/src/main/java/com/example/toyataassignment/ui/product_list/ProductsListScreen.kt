@@ -16,8 +16,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -39,47 +41,69 @@ import coil.transform.CircleCropTransformation
 import com.example.toyataassignment.R
 import com.example.toyataassignment.data.model.ProductModel
 import com.example.toyataassignment.data.model.ProductsModel
+import com.example.toyataassignment.state.ProductListState
 
 @Composable
-fun ProductsListScreen(navController: NavController, productListViewModel: ProductListViewModel){
+fun ProductsListScreen(navController: NavController, productListViewModel: ProductListViewModel) {
+    val productListState by productListViewModel.productListState.collectAsState()
 
-    //get list of all products used
-    val productsList by productListViewModel.productList.collectAsState(initial = emptyList()) //variable to accessing list from view model
+    when (productListState) {
+        is ProductListState.Loading -> {
+            // Show a loading indicator or skeleton screen
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
+        }
+        is ProductListState.Success -> {
+            // Show the list of products
+            val productsList = (productListState as ProductListState.Success).products
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
 
-    Log.d("ProductsListScreen", productsList.toString())
+                    Text(
+                    text = "Products List",
+                    style = TextStyle(fontSize = 30.sp),
+                    modifier = Modifier
+                        .padding(16.dp)
+                )
+                    HorizontalDivider(
+                        modifier = Modifier
+                            .padding(bottom = 10.dp)
+                            .width(350.dp),
+                        color = Color.Black,
+                        thickness = 3.dp
+                    )
 
-    Column (
-        modifier = Modifier
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
 
-    ){
-        Text(
-            text = "Products List",
-            style = TextStyle(fontSize = 30.sp),
-            modifier = Modifier
-                .padding(16.dp)
-        )
-
-        //navController and ProductViewModel
-        ProductsList(navController,productsList)
+                ProductsList(navController, productsList)
+            }
+        }
+        is ProductListState.Error -> {
+            // Show an error message
+            val errorMessage = (productListState as ProductListState.Error).message
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Error: $errorMessage",
+                    style = TextStyle(fontSize = 18.sp),
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
+        }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductsList (navController:NavController, productsList:List<ProductModel?>?){
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 14.dp)
-            .padding(bottom = 10.dp)
-    ){
-        Divider(
-            color = Color.Black,
-            thickness = 3.dp
-        )
-    }
+
 
     //List of Products
     LazyColumn(modifier = Modifier.height(900.dp)) {
@@ -133,7 +157,7 @@ fun ProductsList (navController:NavController, productsList:List<ProductModel?>?
                       modifier = Modifier
                           .size(100.dp)
                       ,
-                      contentScale = ContentScale.Fit
+                      contentScale = ContentScale.Crop
                   )
 
               }
