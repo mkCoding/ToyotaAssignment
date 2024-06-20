@@ -5,6 +5,7 @@ import com.example.toyataassignment.data.model.ProductsModel
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+
 interface ApiRepository {
 
     //get all products
