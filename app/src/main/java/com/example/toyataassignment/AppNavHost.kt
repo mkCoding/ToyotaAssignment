@@ -13,7 +13,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.toyataassignment.data.model.ProductModel
-import com.example.toyataassignment.ui.TestScreen
 import com.example.toyataassignment.ui.product_details.ProductListDetailsScreen
 import com.example.toyataassignment.ui.product_list.ProductListViewModel
 import com.example.toyataassignment.ui.product_list.ProductsListScreen
