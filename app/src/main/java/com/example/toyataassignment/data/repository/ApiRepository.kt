@@ -12,7 +12,7 @@ interface ApiRepository {
     suspend fun getAllProducts():ProductsModel
 
     //get details of a product based on id passed in
-    suspend fun getProductDetails(@Path("productId") productId: Int?): ProductModel
+    suspend fun getProductDetails(productId: Int?): ProductModel
 
 
 }

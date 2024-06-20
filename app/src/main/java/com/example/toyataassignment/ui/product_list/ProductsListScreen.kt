@@ -128,9 +128,6 @@ fun ProductsList (navController:NavController, productsList:List<ProductModel?>?
                               transformations(CircleCropTransformation()) // Optional: apply transformations
                           }
 
-                         // id = R.drawable.ic_launcher_background
-
-
                       ),
                       contentDescription = null, // provide a proper content description
                       modifier = Modifier

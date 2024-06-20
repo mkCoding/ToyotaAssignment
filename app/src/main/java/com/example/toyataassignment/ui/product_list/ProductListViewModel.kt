@@ -22,8 +22,6 @@ class ProductListViewModel @Inject constructor(private val repository: ApiReposi
     private val _productDetails = MutableStateFlow<ProductModel?>(null)
     val productDetails: MutableStateFlow<ProductModel?> = _productDetails
 
-
-
     init {
         getAllProducts()
     }
@@ -33,10 +31,7 @@ class ProductListViewModel @Inject constructor(private val repository: ApiReposi
             var allProducts = repository.getAllProducts()
 
             if(allProducts!=null){
-
                 Log.d("ProductListViewModel", allProducts.toString())
-
-
                 //this is very important as it will be passed to View
                 _productList.emit(allProducts.products)
             }
@@ -48,11 +43,8 @@ class ProductListViewModel @Inject constructor(private val repository: ApiReposi
     fun getProductById(productId:Int?){
         viewModelScope.launch {
             val product = repository.getProductDetails(productId)
-
             if(product!=null){
-
                 Log.d("ProductListViewModel", product.toString())
-
                 _productDetails.value = product
 
             }

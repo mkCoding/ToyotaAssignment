@@ -83,9 +83,6 @@ dependencies {
     //OkHttp
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
-    //Glide
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-
     //Coil
     implementation ("io.coil-kt:coil-compose:1.4.0")
 

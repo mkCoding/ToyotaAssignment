@@ -54,8 +54,7 @@ fun DetailsCard (product: ProductModel?){
     Card (modifier = Modifier
         .fillMaxWidth()
         .height(600.dp)
-        .padding(10.dp),
-
+        .padding(horizontal = 16.dp),
 
     ) {
 
@@ -81,7 +80,7 @@ fun DetailsCard (product: ProductModel?){
                     ),
                     contentDescription = "Image", // provide a proper content description
                     modifier = Modifier
-                        .size(400.dp),
+                        .size(350.dp),
                     contentScale = ContentScale.Fit
                 )
 

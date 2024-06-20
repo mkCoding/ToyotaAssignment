@@ -23,38 +23,27 @@ object ApiModule {
     //Create providers that will be injected throughout the app
 
     @Provides
-    fun providesRetrofit ():Retrofit{
-
-        //used for converting java objects to GSON
-        val gson = Gson()
-        val gsonConverterFactory = GsonConverterFactory.create(gson)
-
-        //Create Interceptor
-        val loggingInterceptor = HttpLoggingInterceptor().apply {
-            level  = HttpLoggingInterceptor.Level.BODY
-        }
-
+    fun providesRetrofit(): Retrofit {
         //create okhttpClient
-        val okHttpClient =  OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
+        val okHttpClient = OkHttpClient.Builder()
+            .addInterceptor( HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY } )
             .build()
 
+        //Retrofit Instance
         return Retrofit.Builder()
             .baseUrl(ApiDetails.BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(gsonConverterFactory)
+            .addConverterFactory(GsonConverterFactory.create(Gson()))
             .build()
-
     }
 
     @Provides
-    fun providesApiEndpoints(retrofit: Retrofit):ApiEndpoints{
+    fun providesApiEndpoints(retrofit: Retrofit): ApiEndpoints {
         return retrofit.create(ApiEndpoints::class.java)
     }
 
-
     @Provides
-    fun providesRepository(apiEndpoints: ApiEndpoints):ApiRepository{
+    fun providesRepository(apiEndpoints: ApiEndpoints): ApiRepository {
         return ApiRepositoryImpl(apiEndpoints)
     }
 
