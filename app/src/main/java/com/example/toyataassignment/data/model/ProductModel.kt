@@ -4,20 +4,24 @@ package com.example.toyataassignment.data.model
 import com.google.gson.annotations.SerializedName
 
 data class ProductModel(
+    @SerializedName("id")
+    val id: Int? = 0,
+    @SerializedName("title")
+    val title: String? = "",
+    @SerializedName("description")
+    val description: String? = "",
     @SerializedName("availabilityStatus")
     val availabilityStatus: String? = "",
     @SerializedName("brand")
     val brand: String? = "",
     @SerializedName("category")
     val category: String? = "",
-    @SerializedName("description")
-    val description: String? = "",
+
     @SerializedName("dimensions")
     val dimensions: DimensionsModel? = DimensionsModel(),
     @SerializedName("discountPercentage")
     val discountPercentage: Double? = 0.0,
-    @SerializedName("id")
-    val id: Int? = 0,
+
     @SerializedName("images")
     val images: List<String?>? = listOf(),
     @SerializedName("meta")
@@ -42,8 +46,7 @@ data class ProductModel(
     val tags: List<String?>? = listOf(),
     @SerializedName("thumbnail")
     val thumbnail: String? = "",
-    @SerializedName("title")
-    val title: String? = "",
+
     @SerializedName("warrantyInformation")
     val warrantyInformation: String? = "",
     @SerializedName("weight")

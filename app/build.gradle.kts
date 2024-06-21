@@ -103,4 +103,10 @@ dependencies {
     implementation ("androidx.compose.ui:ui:1.1.0")
     implementation ("androidx.compose.material3:material3:1.2.0-rc01")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0")
-}
+
+    testImplementation ("org.mockito:mockito-core:3.11.2")
+    testImplementation ("org.mockito.kotlin:mockito-kotlin:3.2.0")
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test-jvm:1.6.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")}

@@ -31,33 +31,21 @@ class ProductListViewModel @Inject constructor(private val repository: ApiReposi
         getAllProducts()
     }
 
-    private fun getAllProducts() {
+    fun getAllProducts() {
         viewModelScope.launch {
-            try{
-                var allProducts = repository.getAllProducts()
-
-                if(allProducts!=null){
-                    //Success State
-                    _productListState.value = ProductListState.Success(allProducts.products)
-
-                    Log.d("ProductListViewModel", allProducts.toString())
-
-                    //this is very important as it will be passed to View
-                    _productList.emit(allProducts.products)
-
-                }else{
-                    //Error State
+            try {
+                val allProducts = repository.getAllProducts().products
+                if (allProducts != null) {
+                    _productListState.value = ProductListState.Success(allProducts)
+                    _productList.value = allProducts
+                } else {
                     _productListState.value = ProductListState.Error("Failed to Fetch products")
                 }
-            }catch (e:Exception){
-                //Error State
+            } catch (e: Exception) {
                 _productListState.value = ProductListState.Error(e.message ?: "Unknown error")
             }
-
         }
-
     }
-
 
     fun getProductById(productId:Int?){
         viewModelScope.launch {
