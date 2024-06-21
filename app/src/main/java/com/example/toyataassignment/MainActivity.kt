@@ -23,14 +23,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ToyataAssignmentTheme {
-//                val productListViewModel: ProductListViewModel = hiltViewModel()
-
                 val navController = rememberNavController()
                 val productListViewModel: ProductListViewModel = hiltViewModel()
-
-//              ProductsListScreen(navController, productListViewModel)
                 AppNavHost(navController = navController, productListViewModel = productListViewModel)
-
             }
         }
     }

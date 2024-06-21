@@ -30,8 +30,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -123,7 +126,21 @@ fun ProductsList (navController:NavController, productsList:List<ProductModel?>?
 
                   )
           {
+              Column (
+                  modifier = Modifier
+                      .fillMaxWidth()
+                      .padding(top = 16.dp),
+                  horizontalAlignment = Alignment.CenterHorizontally
 
+              ){
+                  Text(
+                      text = "Title: ${itemiuk?.title}",
+                      modifier = Modifier,
+                      style = TextStyle(fontWeight = FontWeight.Bold)
+                      // Sets the maximum number of lines to 2
+
+                  )
+              }
               Row (
                   verticalAlignment = Alignment.CenterVertically,
                   modifier = Modifier
@@ -132,12 +149,14 @@ fun ProductsList (navController:NavController, productsList:List<ProductModel?>?
 
               ){
 
-                  Column (
-                      modifier = Modifier.padding(16.dp),
 
+                  Column (
+                      modifier = Modifier
+                          .padding(16.dp)
+                          .padding(end = 16.dp) // Add padding to the right
 
                       ){
-                      Text(text = "Title: ${itemiuk?.title}", modifier = Modifier.padding(bottom = 5.dp))
+
                       Text(text = "Brand: ${itemiuk?.brand}", modifier = Modifier.padding(bottom = 5.dp))
                       Text(text = "Price: ${itemiuk?.price}")
 

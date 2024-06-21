@@ -34,6 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.toyataassignment.ui.product_list.ProductsListScreen
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
@@ -146,7 +147,7 @@ fun DetailsCard (product: ProductModel?){
                 Text(
                     text = product?.description?:"",
                     modifier = Modifier.padding(2.dp),
-                    style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                    style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 15.sp, textAlign = TextAlign.Center)
 
                 )
 
